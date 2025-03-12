@@ -10,12 +10,7 @@
     <nav id="navbar">
         <div class="navbar-left">
             <div class="dropdown">
-                <button class="dropbtn">Our Rooms</button>
-                <div class="dropdown-content">
-                    <a href="#">Room 1</a>
-                    <a href="#">Room 2</a>
-                    <a href="#">Room 3</a>
-                </div>
+                <button class="dropbtn" onclick="scrollToRooms()">Our Rooms</button>
             </div>
             <div class="dropdown">
                 <button class="dropbtn">Offers</button>
@@ -37,7 +32,7 @@
         </div>
         <div class="navbar-right">
             <a href="#" class="nav-link">FAQ's</a>
-            <a href="#" class="nav-link">Login</a>
+            <a href="/Login_Signup_Registration/Guest_Login.html" class="nav-link">Login</a>
         </div>
     </nav>
 
@@ -47,7 +42,6 @@
     
 
     <div class="booking-container">
-        <h2>Book Your Stay</h2>
         <form>
             <div class="form-group">
                 <label for="checkin">Check-in:</label>
@@ -82,14 +76,47 @@
                     <option value="4">4</option>
                 </select>
             </div>
-            <div class="price-summary">
+            <!--<div class="price-summary">
                 <p>Price per night: <strong>₱2,300</strong></p>
                 <p>Total nights: <span id="total-nights">0</span></p>
                 <p>Total price: <span id="total-price">₱0</span></p>
-            </div>
-            <button type="submit" class="submit-btn">Book Now</button>
+            </div>-->
+            <button onclick="searchNow()" class="submit-btn">Search</button>
         </form>
     </div>
+
+    <div id="rooms-section">
+        <h2>Our Rooms</h2>
+        <div class="rooms-container">
+            <!-- Deluxe Room -->
+            <div class="room">
+                <img src="/Homepage/assets/deluxe.jpg" alt="Deluxe Room">
+                <h3>Deluxe Room</h3>
+                <p>Room Size: 25 sqm</p>
+                <p>Price: ₱3,500 per night</p>
+                <button onclick="bookNow()">Book Now</button>
+            </div>
+
+            <!-- Suite Room -->
+            <div class="room">
+                <img src="/Homepage/assets/suite.jpg" alt="Suite Room">
+                <h3>Suite Room</h3>
+                <p>Room Size: 40 sqm</p>
+                <p>Price: ₱5,500 per night</p>
+                <button onclick="bookNow()">Book Now</button>
+            </div>
+
+            <!-- Standard Room -->
+            <div class="room">
+                <img src="/Homepage/assets/standard.jpg" alt="Standard Room">
+                <h3>Standard Room</h3>
+                <p>Room Size: 20 sqm</p>
+                <p>Price: ₱2,300 per night</p>
+                <button onclick="bookNow()">Book Now</button>
+            </div>
+        </div>
+    </div>
+
 
     <img src="/Homepage/assets/7.png" alt="logo" class="footer-logo" id="footer-logo">
     

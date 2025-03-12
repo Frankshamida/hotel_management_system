@@ -2,7 +2,7 @@ window.addEventListener('scroll', function () {
     const navbar = document.getElementById('navbar');
     if (window.scrollY > 50) {
         navbar.classList.add('shrink'); // Add the shrink class
-        navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.54)'; // Optional: Change background color
+        navbar.style.backgroundColor = 'rgba(207, 181, 123, 0.51)'; // Optional: Change background color
     } else {
         navbar.classList.remove('shrink'); // Remove the shrink class
         navbar.style.backgroundColor = 'rgba(255, 255, 255, 0)'; // Optional: Reset background color
@@ -110,3 +110,16 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 100 * index); // Delay each letter for a smooth effect
     });
 });
+
+
+function scrollToRooms() {
+    document.getElementById("rooms-section").scrollIntoView({ behavior: 'smooth' });
+}
+
+function bookNow() {
+    window.location.href = "/Login_Signup_Registration/Guest_Login.html";
+}
+
+function searchNow() {
+    window.location.href = "/Login_Signup_Registration/Guest_Login.html";
+}

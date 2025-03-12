@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOUSEKEEPING</title>
+    <link rel="stylesheet" href="/Login_Signup_Registration/css/Front_Desktop_Staff_Login.css">
+    <script defer src="/Login_Signup_Registration/js/Front_Desk_Staff.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <div class="background"></div>
+    <div class="login-container">
+        <img src="/Login_Signup_Registration/assets/2.png" alt="Logo" class="logo"> <!-- Logo -->
+        <h2>HOUSEKEEPING</h2>
+        
+        <!-- Role Selection -->
+        <div class="input-group">
+            <i class="fa-solid fa-users"></i> <!-- Role Icon -->
+            <select id="roleSelect">
+                <option value="" disabled selected>Select Role</option>
+                <option value="head_staff">Head Staff Housekeeping</option>
+                <option value="staff">Housekeeping Staff</option>
+            </select>
+        </div>
+
+        <!-- Head Staff Front Desk Login -->
+        <div id="headStaffLogin" class="role-login">
+            <div class="input-group">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id="headUsername" placeholder="Housekeeping Head ID">
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="headPassword" placeholder="Password">
+            </div>
+        </div>
+
+        <!-- Staff Front Desk Login -->
+        <div id="staffLogin" class="role-login">
+            <div class="input-group">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id="staffUsername" placeholder="Housekeeping Staff ID">
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="staffPassword" placeholder="Password">
+            </div>
+        </div>
+
+        <button type="submit" class="login-btn" id="loginBtn" style="display: none;">Login</button>
+    </div>
+</body>
+</html>
