@@ -1,0 +1,257 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    position: relative;
+    overflow-y: auto;
+}
+
+#navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensure navbar is above other elements */
+    transition: background-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.navbar-left, .navbar-right {
+    display: flex;
+    align-items: center;
+    flex: 1; /* This ensures both sides take up equal space */
+    justify-content: center; /* Center the content horizontally */
+}
+
+.navbar-center {
+    flex-grow: 1; /* Reduce the flex-grow to bring the logo closer to the sides */
+    text-align: center;
+}
+
+.logo {
+    height: 190px;
+    max-width: 100%;
+    transition: transform 0.6s ease;
+}
+
+/* Optional: Adjust the spacing between the dropdowns and links */
+.navbar-left .dropdown, .navbar-right .nav-link {
+    margin: 0 20px; /* Add some horizontal spacing */
+}
+
+#navbar {
+    transition: all 0.3s ease-in-out; /* Smooth transition */
+    background-color: rgba(255, 255, 255, 0); /* Default background */
+    padding: 20px 20px; /* Default padding */
+}
+
+#navbar.shrink {
+    background-color: rgba(255, 255, 255, 0.54); /* New background */
+    padding: 10px 20px; /* Smaller padding */
+}
+
+
+#navbar.shrink .logo {
+    height: 100px; /* Shrink the logo */
+    transition: height 0.9s ease; /* Smooth transition */
+}
+
+#navbar.shrink .dropbtn, #navbar.shrink .nav-link {
+    font-size: 14px; /* Reduce font size */
+    transition: font-size 0.3s ease; /* Smooth transition */
+}
+
+#navbar.shrink .navbar-left .dropdown, #navbar.shrink .navbar-right .nav-link {
+    margin: 0 10px; /* Reduce spacing between items */
+}
+
+.logo:hover {
+    transform: scale(1.1);
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.dropbtn {
+    background-color: transparent;
+    border: none;
+    color: #333;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.nav-link {
+    color: #333;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.content {
+    padding: 150px 20px;
+    text-align: center;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0) 40%), url('/Homepage/assets/homepage.jpg'); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 60vh;
+    color: white;
+    position: relative; /* Ensure the content is positioned correctly */
+}
+
+
+.booking-container {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    width: 450px;
+    text-align: center;
+    position: relative;
+    z-index: 500; /* Lower z-index than navbar */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 0 auto;
+    margin-top: 200px; /* Adjust this value to ensure it doesn't overlap with the navbar */
+}
+
+.booking-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.booking-container h2 {
+    margin-bottom: 25px;
+    color: #333;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+    outline: none;
+}
+
+.price-summary {
+    margin: 25px 0;
+    text-align: left;
+}
+
+.price-summary p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.price-summary strong {
+    color: #007bff;
+    font-weight: 600;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+.footer-logo {
+    display: block;
+    margin: 20px auto;
+    height: 100px;
+    transition: transform 0.3s ease;
+}
+
+.footer-logo:hover {
+    transform: rotate(360deg);
+}
+
+@media (max-width: 768px) {
+    .logo {
+        height: 80px;
+    }
+
+    .navbar-left, .navbar-right {
+        flex: none;
+    }
+
+    .dropdown {
+        margin-right: 10px;
+    }
+
+    .nav-link {
+        padding: 5px;
+    }
+}

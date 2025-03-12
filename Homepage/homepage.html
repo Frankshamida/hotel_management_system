@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="/Homepage/css/homepage.css">
+</head>
+<body>
+    <nav id="navbar">
+        <div class="navbar-left">
+            <div class="dropdown">
+                <button class="dropbtn">Our Rooms</button>
+                <div class="dropdown-content">
+                    <a href="#">Room 1</a>
+                    <a href="#">Room 2</a>
+                    <a href="#">Room 3</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">Offers</button>
+                <div class="dropdown-content">
+                    <a href="#">Offer 1</a>
+                    <a href="#">Offer 2</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">About</button>
+                <div class="dropdown-content">
+                    <a href="#">Our Story</a>
+                    <a href="#">Team</a>
+                </div>
+            </div>
+        </div>
+        <div class="navbar-center">
+            <img src="/Homepage/assets/6.png" alt="Logo" class="logo" id="main-logo">
+        </div>
+        <div class="navbar-right">
+            <a href="#" class="nav-link">FAQ's</a>
+            <a href="#" class="nav-link">Login</a>
+        </div>
+    </nav>
+
+    <div class="content">
+
+    </div>
+    
+
+    <div class="booking-container">
+        <h2>Book Your Stay</h2>
+        <form>
+            <div class="form-group">
+                <label for="checkin">Check-in:</label>
+                <input type="date" id="checkin" name="checkin" required>
+            </div>
+            <div class="form-group">
+                <label for="checkout">Check-out:</label>
+                <input type="date" id="checkout" name="checkout" required>
+            </div>
+            <div class="form-group">
+                <label for="adults">Adults:</label>
+                <select id="adults" name="adults" required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="children">Children:</label>
+                <select id="children" name="children" required>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+            <div class="price-summary">
+                <p>Price per night: <strong>₱2,300</strong></p>
+                <p>Total nights: <span id="total-nights">0</span></p>
+                <p>Total price: <span id="total-price">₱0</span></p>
+            </div>
+            <button type="submit" class="submit-btn">Book Now</button>
+        </form>
+    </div>
+
+    <img src="/Homepage/assets/7.png" alt="logo" class="footer-logo" id="footer-logo">
+    
+    <script src="/Homepage/js/homepage.js"></script>
+</body>
+</html>
