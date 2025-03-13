@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
     <link rel="stylesheet" href="/Homepage/css/homepage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <nav id="navbar">
@@ -43,6 +44,7 @@
 
     <div class="booking-container">
         <form>
+            <h2>Book Your Stay</h2>
             <div class="form-group">
                 <label for="checkin">Check-in:</label>
                 <input type="date" id="checkin" name="checkin" required>
@@ -85,37 +87,215 @@
         </form>
     </div>
 
+    <section class="features-section">
+        <div class="section-title">
+          <h2>Why Choose Retra Hotel?</h2>
+          <p class="section-subtitle">
+            Experience comfort and luxury in the heart of Cebu City, Philippines.
+          </p>
+        </div>
+        <div class="features-container">
+          <div class="feature-card">
+            <img
+              src="https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg"
+              alt="Luxury Accommodations"
+              class="feature-img"
+            />
+            <div class="feature-content">
+              <h3 class="feature-title">Luxury Accommodations</h3>
+              <p class="feature-text">
+                Stay in elegantly designed rooms and suites with breathtaking views of
+                Cebu City. Perfect for both leisure and business travelers.
+              </p>
+              <a href="#" class="feature-link">
+                Learn More <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+          <div class="feature-card">
+            <img
+              src="https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg"
+              alt="World-Class Amenities"
+              class="feature-img"
+            />
+            <div class="feature-content">
+              <h3 class="feature-title">World-Class Amenities</h3>
+              <p class="feature-text">
+                Enjoy a rooftop infinity pool, a state-of-the-art gym, and a relaxing
+                wellness spa—all designed for the ultimate comfort and convenience.
+              </p>
+              <a href="#" class="feature-link">
+                Learn More <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+          <div class="feature-card">
+            <img
+              src="/Homepage/assets/magellanscross.jpg"
+              alt="Prime Location"
+              class="feature-img"
+            />
+            <div class="feature-content">
+              <h3 class="feature-title">Prime Cebu City Location</h3>
+              <p class="feature-text">
+                Just minutes away from top attractions like Ayala Center, IT Park,
+                and Magellan’s Cross. Perfectly positioned for business and leisure.
+              </p>
+              <a href="#" class="feature-link">
+                Learn More <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+
     <div id="rooms-section">
         <h2>Our Rooms</h2>
         <div class="rooms-container">
             <!-- Deluxe Room -->
             <div class="room">
+                <span class="price-badge">₱3,500/night</span>
                 <img src="/Homepage/assets/deluxe.jpg" alt="Deluxe Room">
                 <h3>Deluxe Room</h3>
-                <p>Room Size: 25 sqm</p>
-                <p>Price: ₱3,500 per night</p>
-                <button onclick="bookNow()">Book Now</button>
+                <div class="room-details">
+                    <i class="fas fa-bed"></i> 1 King Bed &nbsp; <i class="fas fa-user"></i> 2 Guests
+                </div>
+                <p>Indulge in luxury with our spacious Deluxe Room, featuring a private balcony and stunning views. Enjoy elegant furnishings and a marble soaking tub.</p>
+                <button>Book Now</button>
             </div>
-
-            <!-- Suite Room -->
-            <div class="room">
-                <img src="/Homepage/assets/suite.jpg" alt="Suite Room">
-                <h3>Suite Room</h3>
-                <p>Room Size: 40 sqm</p>
-                <p>Price: ₱5,500 per night</p>
-                <button onclick="bookNow()">Book Now</button>
-            </div>
-
+    
             <!-- Standard Room -->
             <div class="room">
+                <span class="price-badge">₱5,500/night</span>
                 <img src="/Homepage/assets/standard.jpg" alt="Standard Room">
                 <h3>Standard Room</h3>
-                <p>Room Size: 20 sqm</p>
-                <p>Price: ₱2,300 per night</p>
-                <button onclick="bookNow()">Book Now</button>
+                <div class="room-details">
+                    <i class="fas fa-bed"></i> 1 Queen Bed &nbsp; <i class="fas fa-user"></i> 2 Guests
+                </div>
+                <p>A cozy and budget-friendly choice, our Standard Room offers comfortable bedding, high-speed internet, and a relaxing atmosphere for your stay.</p>
+                <button>Book Now</button>
+            </div>
+    
+            <!-- Suite Room -->
+            <div class="room">
+                <span class="price-badge">₱7,000/night</span>
+                <img src="/Homepage/assets/suite.jpg" alt="Suite Room">
+                <h3>Suite Room</h3>
+                <div class="room-details">
+                    <i class="fas fa-bed"></i> 2 Queen Beds &nbsp; <i class="fas fa-user"></i> 4 Guests
+                </div>
+                <p>Our spacious Suite Room offers a luxurious stay with ample space, premium amenities, and a cozy seating area for a truly relaxing experience.</p>
+                <button>Book Now</button>
             </div>
         </div>
     </div>
+
+    <section class="testimonials-section">
+        <div class="section-title">
+          <h2>What Our Guests Say</h2>
+        </div>
+        <div class="testimonials-container">
+          <div class="testimonial-slider">
+            <!-- Testimonial 1 (Tagalog) -->
+            <div class="testimonial-card" id="review1">
+              <p class="testimonial-text" id="tagalog-text">
+                "Napakaganda ng hotel na ito! Napakaaliwalas ng kwarto, at
+                napaka-friendly ng staff. Ang buffet breakfast ay sobrang sarap,
+                lalo na ang danggit at mango juice! Babalik kami dito ulit!"
+              </p>
+              <button class="translate-btn" onclick="translateReview()">Translate to English</button>
+              <div class="testimonial-author">
+                <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg" alt="Maria Santos" class="author-img" />
+                <div class="author-info">
+                  <p class="author-name">Maria Santos</p>
+                  <p class="author-title">Traveler from Manila</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Testimonial 2 (English) -->
+            <div class="testimonial-card" id="review2">
+              <p class="testimonial-text">
+                "Absolutely loved my stay at Retra Hotel! The rooftop pool had an
+                amazing view of Cebu City, and the rooms were spotless. The staff
+                were incredibly kind and helpful. Highly recommend!"
+              </p>
+              <div class="testimonial-author">
+                <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg" alt="James Walker" class="author-img" />
+                <div class="author-info">
+                  <p class="author-name">James Walker</p>
+                  <p class="author-title">Backpacker from Canada</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Testimonial 3 (English) -->
+            <div class="testimonial-card" id="review3">
+              <p class="testimonial-text">
+                "An incredible experience! The location is perfect—so close to IT
+                Park and Ayala Center. The beds were super comfy, and I loved the
+                warm welcome from the staff. Five stars!"
+              </p>
+              <div class="testimonial-author">
+                <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg" alt="Liam Johnson" class="author-img" />
+                <div class="author-info">
+                  <p class="author-name">Liam Johnson</p>
+                  <p class="author-title">Business Traveler from Australia</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Testimonial Dots for Navigation -->
+          <div class="testimonial-dots">
+            <span class="testimonial-dot active" onclick="showReview(1)"></span>
+            <span class="testimonial-dot" onclick="showReview(2)"></span>
+            <span class="testimonial-dot" onclick="showReview(3)"></span>
+          </div>
+        </div>
+      </section>
+    
+    <section class="location-section">
+        <div class="location-container">
+          <div class="location-map">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15712.58264150767!2d123.8857746342214!3d10.315699243064079!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a9991d5b8d7d59%3A0x98f645b94e9f1ef7!2sCebu%20City%2C%20Cebu%2C%20Philippines%206000!5e0!3m2!1sen!2sph!4v1710326400000!5m2!1sen!2sph"
+              width="100%"
+              height="100%"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="location-info">
+            <h2 class="location-title">Our Location</h2>
+            <p class="location-text">
+                Nestled in the vibrant heart of Cebu City—the Queen City of the South—our hotel offers an unrivaled gateway to culture, history, and modern luxury. Just moments away from the world-famous Sinulog Festival, lively shopping districts, and exquisite dining experiences, we provide the perfect blend of comfort and adventure for every traveler.
+            </p>
+            <div class="location-features">
+              <div class="location-feature">
+                <i class="fas fa-map-marker-alt"></i> Cebu City, Philippines 6000
+              </div>
+              <div class="location-feature">
+                <i class="fas fa-phone"></i> +63 32 123 4567
+              </div>
+              <div class="location-feature">
+                <i class="fas fa-envelope"></i> info@hotelcebu.com
+              </div>
+            </div>
+            <a
+              href="https://www.google.com/maps/dir//Cebu+City,+Cebu,+Philippines+6000"
+              target="_blank"
+              class="directions-btn"
+              >Get Directions <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+        </div>
+  </section>
+  
+    
+    
 
 
     <img src="/Homepage/assets/7.png" alt="logo" class="footer-logo" id="footer-logo">

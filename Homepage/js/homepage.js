@@ -123,3 +123,29 @@ function bookNow() {
 function searchNow() {
     window.location.href = "/Login_Signup_Registration/Guest_Login.html";
 }
+
+
+let reviews = document.querySelectorAll(".testimonial-card");
+let dots = document.querySelectorAll(".testimonial-dot");
+
+function showReview(index) {
+  reviews.forEach((review, i) => {
+    review.style.display = i === index - 1 ? "block" : "none";
+    dots[i].classList.toggle("active", i === index - 1);
+  });
+}
+
+// Initialize first review as visible
+showReview(1);
+
+// Translation function
+function translateReview() {
+  let tagalogText = document.getElementById("tagalog-text");
+  if (tagalogText.innerText.includes("Napakaganda")) {
+    tagalogText.innerText =
+      "This hotel is amazing! The room is very spacious, and the staff is super friendly. The buffet breakfast is delicious, especially the danggit and mango juice! We'll definitely come back!";
+  } else {
+    tagalogText.innerText =
+      "Napakaganda ng hotel na ito! Napakaaliwalas ng kwarto, at napaka-friendly ng staff. Ang buffet breakfast ay sobrang sarap, lalo na ang danggit at mango juice! Babalik kami dito ulit!";
+  }
+}
