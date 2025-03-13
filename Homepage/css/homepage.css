@@ -131,6 +131,17 @@ body {
     position: relative; /* Ensure the content is positioned correctly */
 }
 
+.content1 {
+  padding: 150px 20px;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 65vh;
+  color: white;
+  position: relative; /* Ensure the content is positioned correctly */
+}
+
 
 .booking-container {
     background-color: #ffffff;

@@ -149,3 +149,99 @@ function translateReview() {
       "Napakaganda ng hotel na ito! Napakaaliwalas ng kwarto, at napaka-friendly ng staff. Ang buffet breakfast ay sobrang sarap, lalo na ang danggit at mango juice! Babalik kami dito ulit!";
   }
 }
+
+
+function redirectToResults() {
+    const checkin = document.getElementById('checkin').value;
+    const checkout = document.getElementById('checkout').value;
+    const adults = document.getElementById('adults').value;
+    const children = document.getElementById('children').value;
+
+    // Redirect to results.html with query parameters
+    window.location.href = `results.html?checkin=${checkin}&checkout=${checkout}&adults=${adults}&children=${children}`;
+}
+
+
+const roomsData = [
+    {
+        type: 'Standard Room',
+        price: '₱2,300',
+        description: 'Comfortable room for 2 guests.',
+        image: 'https://via.placeholder.com/300x200',
+        specifications: ['1 Queen Bed', 'Free Wi-Fi', 'Breakfast Included']
+    },
+    {
+        type: 'Deluxe Room',
+        price: '₱3,500',
+        description: 'Spacious room for 2-3 guests.',
+        image: 'https://via.placeholder.com/300x200',
+        specifications: ['1 King Bed', 'Free Wi-Fi', 'Mini Bar', 'Breakfast Included']
+    },
+    {
+        type: 'Family Suite',
+        price: '₱5,000',
+        description: 'Perfect for families with 2-4 guests.',
+        image: 'https://via.placeholder.com/300x200',
+        specifications: ['2 Queen Beds', 'Free Wi-Fi', 'Mini Bar', 'Breakfast Included']
+    },
+    {
+        type: 'Executive Suite',
+        price: '₱6,500',
+        description: 'Luxurious suite for 2-4 guests.',
+        image: 'https://via.placeholder.com/300x200',
+        specifications: ['1 King Bed', 'Separate Living Area', 'Free Wi-Fi', 'Mini Bar', 'Breakfast Included']
+    },
+    {
+        type: 'Presidential Suite',
+        price: '₱10,000',
+        description: 'Ultimate luxury for 2-6 guests.',
+        image: 'https://via.placeholder.com/300x200',
+        specifications: ['2 King Beds', 'Private Balcony', 'Free Wi-Fi', 'Mini Bar', 'Breakfast Included']
+    }
+];
+
+// Get URL parameters
+const urlParams = new URLSearchParams(window.location.search);
+const checkin = urlParams.get('checkin');
+const checkout = urlParams.get('checkout');
+const adults = parseInt(urlParams.get('adults'));
+const children = parseInt(urlParams.get('children'));
+const totalGuests = adults + children;
+
+// Display summary
+const summary = document.createElement('div');
+summary.className = 'summary';
+summary.textContent = `Check-in: ${checkin}, Check-out: ${checkout}, Adults: ${adults}, Children: ${children}`;
+document.getElementById('suggestedRooms').appendChild(summary);
+
+// Suggest rooms based on total guests
+let suggestedRooms = [];
+if (totalGuests === 2) {
+    suggestedRooms.push(roomsData[0]); // Standard
+}
+if (totalGuests >= 2 && totalGuests <= 3) {
+    suggestedRooms.push(roomsData[1]); // Deluxe
+}
+if (totalGuests >= 2 && totalGuests <= 4) {
+    suggestedRooms.push(roomsData[2]); // Family Suite
+    suggestedRooms.push(roomsData[3]); // Executive Suite
+}
+if (totalGuests >= 2 && totalGuests <= 6) {
+    suggestedRooms.push(roomsData[4]); // Presidential Suite
+}
+
+// Display suggested rooms
+suggestedRooms.forEach(room => {
+    const roomCard = document.createElement('div');
+    roomCard.className = 'room-card';
+    roomCard.innerHTML = `
+        <img src="${room.image}" alt="${room.type}">
+        <h3>${room.type}</h3>
+        <p>${room.description}</p>
+        <p>Price: ${room.price}</p>
+        <ul>
+            ${room.specifications.map(spec => `<li>${spec}</li>`).join('')}
+        </ul>
+    `;
+    document.getElementById('suggestedRooms').appendChild(roomCard);
+});

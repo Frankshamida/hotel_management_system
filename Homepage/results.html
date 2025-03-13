@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suggested Rooms</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+        }
+        .suggested-rooms {
+            flex: 2;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .invoice {
+            flex: 1;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .invoice h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        .invoice p {
+            margin: 10px 0;
+            color: #666;
+        }
+        .room-card {
+            border: 1px solid #ccc;
+            padding: 15px;
+            width: 280px;
+            border-radius: 10px;
+            text-align: center;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        .room-card:hover {
+            transform: translateY(-5px);
+        }
+        .room-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .room-card h3 {
+            margin: 15px 0 10px;
+            font-size: 20px;
+            color: #333;
+        }
+        .room-card p {
+            margin: 5px 0;
+            color: #666;
+        }
+        .room-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+        .room-card ul li {
+            margin: 5px 0;
+            color: #444;
+        }
+        .reserve-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .reserve-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Suggested Rooms Section -->
+        <div class="suggested-rooms" id="suggestedRooms">
+            <!-- Suggested rooms will be displayed here -->
+        </div>
+
+        <!-- Invoice Section -->
+        <div class="invoice" id="invoice">
+            <h2>Booking Summary</h2>
+            <p><strong>Check-in:</strong> <span id="checkin-summary"></span></p>
+            <p><strong>Check-out:</strong> <span id="checkout-summary"></span></p>
+            <p><strong>Adults:</strong> <span id="adults-summary"></span></p>
+            <p><strong>Children:</strong> <span id="children-summary"></span></p>
+        </div>
+    </div>
+
+    <script>
+        const roomsData = [
+            {
+                type: 'Standard Room',
+                price: '₱2,300',
+                description: 'Comfortable room for 2 guests.',
+                image: 'https://via.placeholder.com/300x200',
+                specifications: ['1 Queen Bed', 'Free Wi-Fi', 'Breakfast Included']
+            },
+            {
+                type: 'Deluxe Room',
+                price: '₱3,500',
+                description: 'Spacious room for 2-3 guests.',
+                image: 'https://via.placeholder.com/300x200',
+                specifications: ['1 King Bed', 'Free Wi-Fi', 'Mini Bar', 'Breakfast Included']
+            },
+            {
+                type: 'Family Suite',
+                price: '₱5,000',
+                description: 'Perfect for families with 2-4 guests.',
+                image: 'https://via.placeholder.com/300x200',
+                specifications: ['2 Queen Beds', 'Free Wi-Fi', 'Mini Bar', 'Breakfast Included']
+            },
+            {
+                type: 'Executive Suite',
+                price: '₱6,500',
+                description: 'Luxurious suite for 2-4 guests.',
+                image: 'https://via.placeholder.com/300x200',
+                specifications: ['1 King Bed', 'Separate Living Area', 'Free Wi-Fi', 'Mini Bar', 'Breakfast Included']
+            },
+            {
+                type: 'Presidential Suite',
+                price: '₱10,000',
+                description: 'Ultimate luxury for 2-6 guests.',
+                image: 'https://via.placeholder.com/300x200',
+                specifications: ['2 King Beds', 'Private Balcony', 'Free Wi-Fi', 'Mini Bar', 'Breakfast Included']
+            }
+        ];
+
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const checkin = urlParams.get('checkin');
+        const checkout = urlParams.get('checkout');
+        const adults = parseInt(urlParams.get('adults'));
+        const children = parseInt(urlParams.get('children'));
+        const totalGuests = adults + children;
+
+        // Display summary in the invoice section
+        document.getElementById('checkin-summary').textContent = checkin;
+        document.getElementById('checkout-summary').textContent = checkout;
+        document.getElementById('adults-summary').textContent = adults;
+        document.getElementById('children-summary').textContent = children;
+
+        // Suggest rooms based on total guests
+        let suggestedRooms = [];
+        if (totalGuests === 2) {
+            suggestedRooms.push(roomsData[0]); // Standard
+        }
+        if (totalGuests >= 2 && totalGuests <= 3) {
+            suggestedRooms.push(roomsData[1]); // Deluxe
+        }
+        if (totalGuests >= 2 && totalGuests <= 4) {
+            suggestedRooms.push(roomsData[2]); // Family Suite
+            suggestedRooms.push(roomsData[3]); // Executive Suite
+        }
+        if (totalGuests >= 2 && totalGuests <= 6) {
+            suggestedRooms.push(roomsData[4]); // Presidential Suite
+        }
+
+        // Display suggested rooms
+        suggestedRooms.forEach(room => {
+            const roomCard = document.createElement('div');
+            roomCard.className = 'room-card';
+            roomCard.innerHTML = `
+                <img src="${room.image}" alt="${room.type}">
+                <h3>${room.type}</h3>
+                <p>${room.description}</p>
+                <p>Price: ${room.price}</p>
+                <ul>
+                    ${room.specifications.map(spec => `<li>${spec}</li>`).join('')}
+                </ul>
+                <button class="reserve-btn" onclick="reserveRoom('${room.type}')">Reserve</button>
+            `;
+            document.getElementById('suggestedRooms').appendChild(roomCard);
+        });
+
+        // Function to handle room reservation
+        function reserveRoom(roomType) {
+            alert(`You have reserved the ${roomType}. Thank you!`);
+        }
+    </script>
+</body>
+</html>
