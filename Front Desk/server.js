@@ -24,20 +24,27 @@ db.connect((err) => {
     console.log('Connected to the database');
 });
 
-// Validate Company ID
+// Validate Company ID and Fetch Role
 app.get('/validateCompanyId', (req, res) => {
-    const companyId = req.query.companyId.trim(); // Trim whitespace
+    const companyId = req.query.companyId.trim();
+    console.log("Validating company_id:", companyId);
 
-    const query = 'SELECT * FROM employees WHERE TRIM(company_id) = ?';
+    const query = `
+        SELECT email, department AS role
+        FROM employees
+        WHERE TRIM(company_id) = ?
+    `;
+
     db.query(query, [companyId], (err, results) => {
         if (err) {
+            console.error("Database error:", err);
             return res.status(500).json({ valid: false });
         }
 
         if (results.length > 0) {
-            res.json({ valid: true });
+            res.json({ valid: true, email: results[0].email, role: results[0].role });
         } else {
-            res.json({ valid: false });
+            res.json({ valid: false, message: 'No matching company ID found' });
         }
     });
 });
@@ -51,51 +58,74 @@ app.post('/register', (req, res) => {
         return res.status(400).json({ success: false, message: 'All fields are required' });
     }
 
-    // Check if company_id exists and role matches
-    const checkCompanyQuery = `
-        SELECT e.employee_id, r.role_name 
-        FROM employees e
-        JOIN employee_roles er ON e.employee_id = er.employee_id
-        JOIN roles r ON er.role_id = r.role_id
-        WHERE e.company_id = ? AND r.role_name = ?
-    `;
-
-    db.query(checkCompanyQuery, [companyId, role], (err, results) => {
+    // Check if username already exists
+    const checkUserQuery = 'SELECT * FROM front_desk_users WHERE username = ?';
+    db.query(checkUserQuery, [username], (err, userResults) => {
         if (err) {
             return res.status(500).json({ success: false, message: 'Database error' });
         }
 
-        if (results.length === 0) {
-            return res.status(400).json({ success: false, message: 'Invalid Company ID or Role' });
+        if (userResults.length > 0) {
+            return res.status(400).json({ success: false, message: 'Username already exists' });
         }
 
-        // Check if username already exists
-        const checkUserQuery = 'SELECT * FROM front_desk_users WHERE username = ?';
-        db.query(checkUserQuery, [username], (err, userResults) => {
+        // Hash the password
+        bcrypt.hash(password, 10, (err, hash) => {
             if (err) {
-                return res.status(500).json({ success: false, message: 'Database error' });
+                return res.status(500).json({ success: false, message: 'Error hashing password' });
             }
 
-            if (userResults.length > 0) {
-                return res.status(400).json({ success: false, message: 'Username already exists' });
-            }
-
-            // Hash the password
-            bcrypt.hash(password, 10, (err, hash) => {
+            // Insert new user into front_desk_users table
+            const insertUserQuery = 'INSERT INTO front_desk_users (company_id, username, password, role) VALUES (?, ?, ?, ?)';
+            db.query(insertUserQuery, [companyId, username, hash, role], (err, insertResults) => {
                 if (err) {
-                    return res.status(500).json({ success: false, message: 'Error hashing password' });
+                    return res.status(500).json({ success: false, message: 'Database error' });
                 }
 
-                // Insert new user into front_desk_users table
-                const insertUserQuery = 'INSERT INTO front_desk_users (company_id, username, password, role) VALUES (?, ?, ?, ?)';
-                db.query(insertUserQuery, [companyId, username, hash, role], (err, insertResults) => {
-                    if (err) {
-                        return res.status(500).json({ success: false, message: 'Database error' });
-                    }
-
-                    res.json({ success: true, message: 'Registration successful' });
-                });
+                res.json({ success: true, message: 'Registration successful' });
             });
+        });
+    });
+});
+
+// Login endpoint
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+    console.log("Login request received:", { username, password }); // Log the request
+
+    if (!username || !password) {
+        console.log("Username or password missing");
+        return res.status(400).json({ success: false, message: 'Username and password are required' });
+    }
+
+    const query = 'SELECT * FROM front_desk_users WHERE username = ?';
+    db.query(query, [username], (err, results) => {
+        if (err) {
+            console.error("Database error:", err);
+            return res.status(500).json({ success: false, message: 'Database error' });
+        }
+
+        if (results.length === 0) {
+            console.log("User not found:", username);
+            return res.status(400).json({ success: false, message: 'Invalid username or password' });
+        }
+
+        const user = results[0];
+        console.log("User found:", user);
+
+        bcrypt.compare(password, user.password, (err, isMatch) => {
+            if (err) {
+                console.error("Error comparing passwords:", err);
+                return res.status(500).json({ success: false, message: 'Error comparing passwords' });
+            }
+
+            if (!isMatch) {
+                console.log("Password mismatch");
+                return res.status(400).json({ success: false, message: 'Invalid username or password' });
+            }
+
+            console.log("Login successful for user:", user.username);
+            res.json({ success: true, message: 'Login successful', user: { username: user.username, role: user.role } });
         });
     });
 });

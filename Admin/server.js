@@ -84,7 +84,7 @@ app.get("/get-employees", (req, res) => {
             employees.hire_date,
             employees.salary,
             employees.department,
-            employees.company_id,  -- Include company_id
+            employees.company_id,
             roles.role_name
         FROM employees
         JOIN employee_roles ON employees.employee_id = employee_roles.employee_id

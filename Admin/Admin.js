@@ -31,7 +31,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 <input type="number" id="salary" name="salary" step="0.01" required>
 
                 <label for="department">Department:</label>
-                <input type="text" id="department" name="department" required>
+                <select id="department" name="department" required>
+                    <option value="Front Desk">Front Desk</option>
+                    <option value="House Keeping">House Keeping</option>
+                    <option value="Maintenance">Maintenance</option>
+                </select>
 
                 <label for="role">Role:</label>
                 <select id="role" name="role" required>
@@ -56,13 +60,20 @@ document.addEventListener("DOMContentLoaded", function () {
         const companyIdInput = document.getElementById("company_id");
 
         generateCompanyIdBtn.addEventListener("click", function () {
-            const uniqueId = generateUniqueId(); // Generate a unique ID
+            const uniqueId = generateUniqueId(); // Generate a unique 8-digit numeric ID
             companyIdInput.value = uniqueId;
+
+            // Trigger validation (if needed)
+            const event = new Event("input", { bubbles: true });
+            companyIdInput.dispatchEvent(event);
         });
 
-        // Function to generate a unique ID
+        // Function to generate a unique 8-digit numeric ID
         function generateUniqueId() {
-            return "EMP-" + Math.random().toString(36).substr(2, 9).toUpperCase();
+            const min = 10000000; // Minimum 8-digit number (10000000)
+            const max = 99999999; // Maximum 8-digit number (99999999)
+            const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min; // Generate a random 8-digit number
+            return randomNumber.toString(); // Convert the number to a string
         }
 
         // Handle form submission
@@ -110,32 +121,95 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // View Employees Button
     viewEmployeesBtn.addEventListener("click", function () {
-        fetch("http://localhost:3000/get-employees")
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.error) {
-                    contentDiv.innerHTML = `<h2>Error: ${data.error}</h2>`;
-                } else {
-                    let employeesHTML = "<h2>Employees</h2><ul>";
-                    data.forEach((employee) => {
-                        employeesHTML += `
-                            <li>
-                                <strong>${employee.first_name} ${employee.last_name}</strong>
-                                <p>Email: ${employee.email}</p>
-                                <p>Department: ${employee.department}</p>
-                                <p>Role: ${employee.role_name}</p>
-                                <p>Company ID: ${employee.company_id}</p>  <!-- Display Company ID -->
-                            </li>
-                        `;
-                    });
-                    employeesHTML += "</ul>";
-                    contentDiv.innerHTML = employeesHTML;
-                }
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-                contentDiv.innerHTML = "<h2>Error loading employees.</h2>";
+        contentDiv.innerHTML = `
+            <h2>Employees</h2>
+            <div>
+                <input type="text" id="searchEmployee" placeholder="Search by name...">
+                <select id="filterRole">
+                    <option value="">All Roles</option>
+                    <option value="head_housekeeping">Head Housekeeping</option>
+                    <option value="head_frontdesk">Head Front Desk</option>
+                    <option value="housekeeping_staff">Housekeeping Staff</option>
+                    <option value="frontdesk_staff">Front Desk Staff</option>
+                    <option value="maintenance">Maintenance</option>
+                </select>
+                <select id="filterDepartment">
+                    <option value="">All Departments</option>
+                    <option value="Front Desk">Front Desk</option>
+                    <option value="House Keeping">House Keeping</option>
+                    <option value="Maintenance">Maintenance</option>
+                </select>
+            </div>
+            <ul id="employeeList"></ul>
+        `;
+
+        const searchEmployeeInput = document.getElementById("searchEmployee");
+        const filterRoleSelect = document.getElementById("filterRole");
+        const filterDepartmentSelect = document.getElementById("filterDepartment");
+        const employeeList = document.getElementById("employeeList");
+
+        let allEmployees = []; // Store all employees fetched from the server
+
+        // Function to fetch and display employees
+        function fetchAndDisplayEmployees() {
+            fetch("http://localhost:3000/get-employees")
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.error) {
+                        employeeList.innerHTML = `<li>Error: ${data.error}</li>`;
+                    } else {
+                        allEmployees = data; // Store all employees
+                        applyFilters(); // Apply filters after fetching
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                    employeeList.innerHTML = "<li>Error loading employees.</li>";
+                });
+        }
+
+        // Function to apply all filters (search, role, department)
+        function applyFilters() {
+            const searchTerm = searchEmployeeInput.value.toLowerCase();
+            const selectedRole = filterRoleSelect.value;
+            const selectedDepartment = filterDepartmentSelect.value;
+
+            const filteredEmployees = allEmployees.filter((employee) => {
+                const fullName = `${employee.first_name} ${employee.last_name}`.toLowerCase();
+                const role = employee.role_name;
+                const department = employee.department;
+
+                // Check if the employee matches all filters
+                return (
+                    (searchTerm === "" || fullName.includes(searchTerm)) &&
+                    (selectedRole === "" || role === selectedRole) &&
+                    (selectedDepartment === "" || department === selectedDepartment)
+                );
             });
+
+            // Display filtered employees
+            let employeesHTML = "";
+            filteredEmployees.forEach((employee) => {
+                employeesHTML += `
+                    <li>
+                        <strong>${employee.first_name} ${employee.last_name}</strong>
+                        <p>Email: ${employee.email}</p>
+                        <p>Department: ${employee.department}</p>
+                        <p>Role: ${employee.role_name}</p>
+                        <p>Company ID: ${employee.company_id}</p>
+                    </li>
+                `;
+            });
+            employeeList.innerHTML = employeesHTML;
+        }
+
+        // Initial fetch and display
+        fetchAndDisplayEmployees();
+
+        // Add event listeners for search and filters
+        searchEmployeeInput.addEventListener("input", applyFilters);
+        filterRoleSelect.addEventListener("change", applyFilters);
+        filterDepartmentSelect.addEventListener("change", applyFilters);
     });
 
     // Logout Button
