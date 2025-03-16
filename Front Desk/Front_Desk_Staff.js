@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (data.success) {
                     alert("Login successful!");
                     // Redirect to dashboard or another page
-                    window.location.href = "/dashboard";
+                    window.location.href = "/Front Desk/Frontdesk_Dashboard.html";
                 } else {
                     loginError.textContent = data.message || "Login failed!";
                 }
@@ -169,3 +169,18 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     });
 });
+
+document.getElementById("logoutBtn").addEventListener("click", function () {
+    fetch('http://localhost:3000/logout', { method: 'GET', credentials: 'include' })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                sessionStorage.removeItem("user");
+                localStorage.removeItem("user");
+                alert("Logged out successfully!");
+                window.location.href = "/Front Desk/Front.html";
+            }
+        })
+        .catch(error => console.error('Logout error:', error));
+});
+
