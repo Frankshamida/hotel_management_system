@@ -100,6 +100,161 @@ app.get("/get-employees", (req, res) => {
     });
 });
 
+// Get User Accounts Endpoint
+app.get("/get-user-accounts", (req, res) => {
+    const sql = `
+        SELECT 
+            employees.first_name,
+            employees.last_name,
+            employees.company_id,
+            employees.department,
+            front_desk_users.username,
+            front_desk_users.role,
+            front_desk_users.created_at
+        FROM front_desk_users
+        JOIN employees ON front_desk_users.company_id = employees.company_id
+    `;
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: "Failed to fetch user accounts." });
+        }
+        console.log("Fetched User Accounts:", results); // Debugging: Log the fetched data
+        res.json(results);
+    });
+});
+
+app.get("/get-employees", (req, res) => {
+    const sql = `
+        SELECT 
+            employees.employee_id,
+            employees.first_name,
+            employees.last_name,
+            employees.email,
+            employees.phone_number,
+            employees.hire_date,
+            employees.salary,
+            employees.department,
+            employees.company_id,
+            roles.role_name
+        FROM employees
+        JOIN employee_roles ON employees.employee_id = employee_roles.employee_id
+        JOIN roles ON employee_roles.role_id = roles.role_id
+    `;
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: "Failed to fetch employees." });
+        }
+        res.json(results);
+    });
+});
+
+app.post("/create-room", (req, res) => {
+    const {
+        room_number,
+        floor,
+        room_type,
+        bed_type,
+        price_per_night,
+        status,
+        max_occupancy,
+        amenities,
+        image_url,
+    } = req.body;
+
+    const sql = `
+        INSERT INTO rooms (
+            room_number, floor, room_type, bed_type, price_per_night, status, max_occupancy, amenities, image_url
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `;
+    db.query(
+        sql,
+        [
+            room_number,
+            floor,
+            room_type,
+            bed_type,
+            price_per_night,
+            status,
+            max_occupancy,
+            amenities,
+            image_url,
+        ],
+        (err, result) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ error: "Failed to create room." });
+            }
+            res.json({ message: "Room created successfully!" });
+        }
+    );
+});
+
+app.get("/get-rooms", (req, res) => {
+    const sql = `SELECT * FROM rooms`;
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: "Failed to fetch rooms." });
+        }
+        res.json(results);
+    });
+});
+
+app.post("/create-room", (req, res) => {
+    const {
+        room_number,
+        floor,
+        room_type,
+        bed_type,
+        price_per_night,
+        status,
+        max_occupancy,
+        amenities,
+        image_url,
+    } = req.body;
+
+    const sql = `
+        INSERT INTO rooms (
+            room_number, floor, room_type, bed_type, price_per_night, status, max_occupancy, amenities, image_url
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `;
+    db.query(
+        sql,
+        [
+            room_number,
+            floor,
+            room_type,
+            bed_type,
+            price_per_night,
+            status,
+            max_occupancy,
+            amenities,
+            image_url,
+        ],
+        (err, result) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ error: "Failed to create room." });
+            }
+            res.json({ message: "Room created successfully!" });
+        }
+    );
+});
+
+app.get("/get-rooms", (req, res) => {
+    const sql = `SELECT * FROM rooms`;
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: "Failed to fetch rooms." });
+        }
+        res.json(results);
+    });
+});
+
+
 // Serve static files (HTML, CSS, JS)
 app.use(express.static("public"));
 

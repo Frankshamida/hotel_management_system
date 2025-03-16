@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRONT DESK</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="Front_Desk_Staff_Login.css">
+</head>
+<body>
+    <div class="background"></div>
+    <div class="login-container">
+        <!-- Login Form (Initially Visible) -->
+        <div id="loginForm">
+            <img src="/Login_Signup_Registration/assets/2.png" alt="Logo" class="logo">
+            <h2>FRONT DESK LOGIN</h2>
+            <div class="input-group">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id="loginUsername" placeholder="Username" required>
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="loginPassword" placeholder="Password" required>
+            </div>
+            <div id="loginError" class="error-message"></div>
+            <button type="submit" class="login-btn" id="loginBtn">Login</button>
+            <div class="register-text">
+                Don't have an account? <a href="#" id="showRegisterLink">Register here</a>
+            </div>
+        </div>
+
+        <!-- Registration Form (Initially Hidden) -->
+        <div id="registrationForm" class="hidden">
+            <img src="/Login_Signup_Registration/assets/2.png" alt="Logo" class="logo">
+            <h2>REGISTRATION</h2>
+            <div class="input-group">
+                <i class="fa-solid fa-building"></i>
+                <input type="text" id="companyId" placeholder="Company ID" required>
+                <span id="companyIdCheck" class="validation-icon"></span>
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id="regUsername" placeholder="Username" readonly required>
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="regPassword" placeholder="Password" required>
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="regConfirmPassword" placeholder="Confirm Password" required>
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-users"></i>
+                <input type="text" id="regRole" placeholder="Role" readonly required>
+            </div>
+            <div id="registerError" class="error-message"></div>
+            <button type="submit" class="login-btn" id="registerBtn" disabled>Register</button>
+            <div class="register-text">
+                Already have an account? <a href="#" id="showLoginLink">Login here</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="Front_Desk_Staff.js"></script>
+</body>
+</html>

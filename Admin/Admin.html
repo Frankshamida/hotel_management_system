@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Admin</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="/Admin/Admin.css">
 </head>
@@ -13,8 +13,11 @@
         <div class="sidebar">
             <h2>Admin Dashboard</h2>
             <ul>
+                <li><button id="dashboardBtn"><i class="fas fa-chart-pie"></i> Dashboard</button></li>
                 <li><button id="createUserBtn"><i class="fas fa-user-plus"></i> Create User</button></li>
                 <li><button id="viewEmployeesBtn"><i class="fas fa-users"></i> View Employees</button></li>
+                <li><button id="viewUserAccountsBtn"><i class="fas fa-user-circle"></i> Employee User Accounts</button></li>
+                <li><button id="createRoomsBtn"><i class="fas fa-bed"></i> Create Rooms</button></li>
                 <li><button id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button></li>
             </ul>
         </div>
@@ -31,5 +34,6 @@
     </div>
 
     <script src="/Admin/Admin.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>
