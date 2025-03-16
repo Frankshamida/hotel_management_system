@@ -21,6 +21,60 @@ db.connect((err) => {
     console.log("Database connected!");
 });
 
+// POST endpoint for login (existing code)
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+
+    if (!username || !password) {
+        return res.status(400).json({ success: false, message: 'Username and password are required' });
+    }
+
+    const query = 'SELECT * FROM front_desk_users WHERE username = ?';
+    db.query(query, [username], (err, results) => {
+        if (err) {
+            console.error("Database error:", err);
+            return res.status(500).json({ success: false, message: 'Database error' });
+        }
+
+        if (results.length === 0) {
+            return res.status(400).json({ success: false, message: 'Invalid username or password' });
+        }
+
+        const user = results[0];
+        bcrypt.compare(password, user.password, (err, isMatch) => {
+            if (err) {
+                return res.status(500).json({ success: false, message: 'Error comparing passwords' });
+            }
+
+            if (!isMatch) {
+                return res.status(400).json({ success: false, message: 'Invalid username or password' });
+            }
+
+            // Redirect to dashboard on successful login
+            res.json({
+                success: true,
+                message: 'Login successful',
+                redirectUrl: '/Front Desk/Frontdesk_Dashboard.html'
+            });
+        });
+    });
+});
+
+// Logout endpoint
+app.get('/logout', (req, res) => {
+    // Clear session or token (if applicable)
+    // Example: If using sessions
+    req.session.destroy((err) => {
+        if (err) {
+            console.error("Error destroying session:", err);
+            return res.status(500).json({ success: false, message: "Logout failed" });
+        }
+
+        // Redirect to the login page
+        res.redirect('/Front_Desk_Staff_Login.html');
+    });
+});
+
 // Create Employee Endpoint
 app.post("/create-employee", (req, res) => {
     const { first_name, last_name, email, phone_number, hire_date, salary, department, role, company_id } = req.body;

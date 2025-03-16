@@ -33,8 +33,17 @@ body {
     border-radius: 12px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     text-align: center;
-    width: 350px;
+    width: 800px; /* Wider container for 2 columns */
     animation: fadeIn 1s ease-in-out;
+}
+
+.registration-columns {
+    display: flex;
+    gap: 20px;
+}
+
+.column {
+    flex: 1;
 }
 
 .logo {
@@ -98,6 +107,20 @@ input:focus, select:focus {
     background: #ff5500;
 }
 
+.login-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.back-btn {
+    background: #6c757d;
+    margin-top: 10px;
+}
+
+.back-btn:hover {
+    background: #5a6268;
+}
+
 .register-text {
     margin-top: 15px;
     font-size: 14px;
@@ -113,32 +136,12 @@ input:focus, select:focus {
     text-decoration: underline;
 }
 
-/* Hide login fields initially */
-.role-login {
+.hidden {
     display: none;
 }
 
-
-/* Add this to the existing CSS */
-.role-login {
-    display: none; /* Initially hidden */
-}
-
-.role-login.active {
-    display: block; /* Show when active */
-}
-
-#loginForm.active {
-    display: none; /* Hide login form when registration form is active */
-}
-
-/* Add this to the existing CSS */
-.hidden {
-    display: none; /* Hide the form */
-}
-
 .error-message {
-    color: #ff5252; /* Red color for error messages */
+    color: #ff5252;
     font-size: 14px;
     margin-bottom: 15px;
     text-align: center;
@@ -150,18 +153,18 @@ input:focus, select:focus {
     top: 50%;
     transform: translateY(-50%);
     font-size: 16px;
-    opacity: 0; /* Initially hidden */
+    opacity: 0;
     transition: opacity 0.3s ease;
     color: #4CAF50;
 }
 
 .validation-icon.valid {
-    color: #4CAF50; /* Green for valid */
+    color: #4CAF50;
     opacity: 1;
 }
 
 .validation-icon.invalid {
-    color: #FF5252; /* Red for invalid */
+    color: #FF5252;
     opacity: 1;
 }
 
@@ -178,10 +181,9 @@ input:focus, select:focus {
 }
 
 .validation-icon.valid, .validation-icon.invalid {
-    animation: bounce 0.5s ease; /* Bounce animation */
+    animation: bounce 0.5s ease;
 }
 
-/* Animations */
 @keyframes fadeIn {
     from {
         opacity: 0;

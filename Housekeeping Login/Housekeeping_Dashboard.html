@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Housekeeping</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="Housekeeping_Dashboard.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Housekeeping</h2>
+            <ul>
+                <li><button id="dashboardBtn"><i class="fas fa-chart-pie"></i> Dashboard</button></li>
+                <li><button id="reservedRoomBtn"><i class="fas fa-bed"></i> Reserved Room</button></li>
+                <li><button id="reportsBtn"><i class="fas fa-file-alt"></i> Reports</button></li>
+                <li><button id="updateRoomsBtn"><i class="fas fa-door-open"></i> Update Rooms to Checkout</button></li>
+                <li><button id="requestHousekeepingBtn"><i class="fas fa-broom"></i> Request Housekeeping</button></li>
+                <li><button id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header>
+                <h1>Welcome, Housekeeping</h1>
+            </header>
+            <div id="content">
+                <!-- Content will be dynamically loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="Housekeeping_Dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>

@@ -234,8 +234,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Logout Button
     logoutBtn.addEventListener("click", function () {
-        window.location.href = "/login.html"; // Redirect to login page
+        alert("Logged out successfully!");
+        window.location.href = "/Admin/Admin_Login.html"; // Redirect to the login page
     });
+    
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -357,10 +359,6 @@ document.addEventListener("DOMContentLoaded", function () {
         filterUserRoleSelect.addEventListener("change", applyUserAccountFilters);
     });
 
-    // Logout Button (existing code)
-    logoutBtn.addEventListener("click", function () {
-        window.location.href = "/login.html"; // Redirect to login page
-    });
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -786,4 +784,5 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 });
+
 

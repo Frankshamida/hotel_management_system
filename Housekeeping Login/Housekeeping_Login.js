@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (data.success) {
                     alert("Login successful!");
                     // Redirect to dashboard or another page
-                    window.location.href = "/dashboard";
+                    window.location.href = "/Housekeeping Login/Housekeeping_Dashboard.html";
                 } else {
                     loginError.textContent = data.message || "Login failed!";
                 }

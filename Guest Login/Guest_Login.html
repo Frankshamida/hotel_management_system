@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FRONT DESK</title>
+    <title>Guest Login & Registration</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="Front_Desk_Staff_Login.css">
+    <link rel="stylesheet" href="Guest_Login.css">
 </head>
 <body>
     <div class="background"></div>
     <div class="login-container">
         <!-- Login Form (Initially Visible) -->
-        <div id="loginForm">
+        <div id="loginForm" class="active">
             <img src="/Login_Signup_Registration/assets/2.png" alt="Logo" class="logo">
-            <h2>FRONT DESK LOGIN</h2>
+            <h2>LOGIN</h2>
             <div class="input-group">
                 <i class="fa-solid fa-user"></i>
                 <input type="text" id="loginUsername" placeholder="Username" required>
@@ -33,35 +33,129 @@
         <div id="registrationForm" class="hidden">
             <img src="/Login_Signup_Registration/assets/2.png" alt="Logo" class="logo">
             <h2>REGISTRATION</h2>
-            <div class="input-group">
-                <i class="fa-solid fa-building"></i>
-                <input type="text" id="companyId" placeholder="Company ID" required>
-                <span id="companyIdCheck" class="validation-icon"></span>
+            <div class="registration-columns">
+                <!-- Column 1 -->
+                <div class="column">
+                    <div class="input-group">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" id="firstName" placeholder="First Name" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" id="lastName" placeholder="Last Name" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" id="email" placeholder="Email" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-phone"></i>
+                        <input type="text" id="phoneNumber" placeholder="Phone Number" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-globe"></i>
+                        <label for="guestType">Are you a Local or Foreign Guest?</label>
+                        <select id="guestType" required>
+                            <option value="">Select</option>
+                            <option value="local">Local</option>
+                            <option value="foreign">Foreign</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-flag"></i>
+                        <input type="text" id="localNationality" value="Filipino" readonly>
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-globe"></i>
+                        <input type="text" id="localCountry" value="Philippines" readonly>
+                    </div>
+                </div>
+
+                <!-- Column 2 -->
+                <div class="column">
+                    <div class="input-group">
+                        <i class="fa-solid fa-id-card"></i>
+                        <label for="localIdType">Valid ID Type</label>
+                        <select id="localIdType" required>
+                            <option value="">Select ID Type</option>
+                            <option value="Philippine Passport">Philippine Passport</option>
+                            <option value="Driver’s License (LTO)">Driver’s License (LTO)</option>
+                            <option value="Unified Multi-Purpose ID (UMID)">Unified Multi-Purpose ID (UMID)</option>
+                            <option value="Philippine Identification (PhilSys ID / National ID)">Philippine Identification (PhilSys ID / National ID)</option>
+                            <option value="Social Security System (SSS) ID">Social Security System (SSS) ID</option>
+                            <option value="Government Service Insurance System (GSIS) eCard">Government Service Insurance System (GSIS) eCard</option>
+                            <option value="Professional Regulation Commission (PRC) ID">Professional Regulation Commission (PRC) ID</option>
+                            <option value="Commission on Elections (COMELEC) Voter’s ID or Voter’s Certification">Commission on Elections (COMELEC) Voter’s ID or Voter’s Certification</option>
+                            <option value="Postal ID (issued by PHLPost)">Postal ID (issued by PHLPost)</option>
+                            <option value="Senior Citizen ID">Senior Citizen ID</option>
+                            <option value="Persons with Disabilities (PWD) ID">Persons with Disabilities (PWD) ID</option>
+                            <option value="Overseas Workers Welfare Administration (OWWA) ID">Overseas Workers Welfare Administration (OWWA) ID</option>
+                            <option value="Bureau of Internal Revenue (BIR) Taxpayer Identification Number (TIN) ID">Bureau of Internal Revenue (BIR) Taxpayer Identification Number (TIN) ID</option>
+                            <option value="PhilHealth ID">PhilHealth ID</option>
+                            <option value="Barangay ID">Barangay ID</option>
+                            <option value="Company ID">Company ID</option>
+                            <option value="Student ID">Student ID</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-id-card"></i>
+                        <input type="text" id="localIdNumber" placeholder="ID Number" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-flag"></i>
+                        <label for="foreignNationality">Nationality</label>
+                        <select id="foreignNationality" required>
+                            <option value="">Select Nationality</option>
+                            <option value="Filipino">Filipino</option>
+                            <option value="American">American</option>
+                            <option value="Chinese">Chinese</option>
+                            <option value="Japanese">Japanese</option>
+                            <!-- Add more nationalities as needed -->
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-globe"></i>
+                        <input type="text" id="foreignCountry" placeholder="Country" readonly>
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-passport"></i>
+                        <input type="text" id="passportNumber" placeholder="Passport Number" required>
+                    </div>
+                </div>
             </div>
-            <div class="input-group">
-                <i class="fa-solid fa-user"></i>
-                <input type="text" id="regUsername" placeholder="Username" readonly required>
-            </div>
-            <div class="input-group">
-                <i class="fa-solid fa-lock"></i>
-                <input type="password" id="regPassword" placeholder="Password" required>
-            </div>
-            <div class="input-group">
-                <i class="fa-solid fa-lock"></i>
-                <input type="password" id="regConfirmPassword" placeholder="Confirm Password" required>
-            </div>
-            <div class="input-group">
-                <i class="fa-solid fa-users"></i>
-                <input type="text" id="regRole" placeholder="Role" readonly required>
-            </div>
-            <div id="registerError" class="error-message"></div>
-            <button type="submit" class="login-btn" id="registerBtn" disabled>Register</button>
+
+            <!-- Error Message -->
+            <div id="registrationError" class="error-message"></div>
+
+            <!-- Confirm Button -->
+            <button type="button" class="login-btn" id="confirmBtn">Confirm</button>
             <div class="register-text">
                 Already have an account? <a href="#" id="showLoginLink">Login here</a>
             </div>
         </div>
+
+        <!-- Create Your Account Form (Initially Hidden) -->
+        <div id="createAccountForm" class="hidden">
+            <img src="/Login_Signup_Registration/assets/2.png" alt="Logo" class="logo">
+            <h2>CREATE YOUR ACCOUNT</h2>
+            <div class="input-group">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id="username" placeholder="Username" required>
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="password" placeholder="Password" required>
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+            </div>
+            <div id="createAccountError" class="error-message"></div>
+            <button type="button" class="login-btn" id="registerBtn">Register</button>
+            <button type="button" class="login-btn back-btn" id="backToRegistrationBtn">Back to Registration</button>
+        </div>
     </div>
 
-    <script src="Front_Desk_Staff.js"></script>
+    <script src="Guest_Login.js"></script>
 </body>
 </html>

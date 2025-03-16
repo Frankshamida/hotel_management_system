@@ -4,25 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ADMIN LOGIN</title>
-    <link rel="stylesheet" href="/Login_Signup_Registration/css/Admin_Login.css">
-    <script defer src="/Login_Signup_Registration/js/Admin_Login.js"></script>
+    <link rel="stylesheet" href="/Admin/Admin_Login.css">
+    <script defer src="/Admin/Admin_Login.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
     <div class="background"></div>
     <div class="login-container">
-        <img src="/Login_Signup_Registration/assets/2.png" alt="Logo" class="logo"> <!-- Add your logo image -->
-        <h2>ADMINISTRATOR</h2>
         <form id="loginForm">
+            <img src="/Login_Signup_Registration/assets/2.png" alt="Logo" class="logo">
+            <h2>ADMIN</h2>
             <div class="input-group">
-                <i class="fas fa-user"></i>
-                <input type="text" id="username" placeholder="Username" required>
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id="loginUsername" placeholder="Username" required>
             </div>
             <div class="input-group">
-                <i class="fas fa-lock"></i>
-                <input type="password" id="password" placeholder="Password" required>
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="loginPassword" placeholder="Password" required>
             </div>
-            <button type="submit" class="login-btn">Login</button>
+            <div id="loginError" class="error-message"></div>
+            <button type="submit" class="login-btn" id="loginBtn">Login</button>
         </form>
     </div>
 </body>
